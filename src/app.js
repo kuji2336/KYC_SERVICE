@@ -28,20 +28,23 @@ const message = {
   ],
 };
 
-async function run() {
+const SendNotification = async()=>{
   const response = await mailchimp.messages.sendTemplate({
     key: process.env.MAILCHIMP_KEY,
     template_name: "test2", //Template Name in your Mandrill application `https://mandrillapp.com/templates`
     template_content: [],
     message,
     async: true,
-  });
-  console.log(response);
+  })
+
+  return response[0]
 }
 
+
 app.get("/gmail", (req, res) => {
-  run();
-  res.send("connected");
+  SendNotification().then((response)=>{
+    return res.send({status: response})
+  })
 });
 
 app.listen(3000);
