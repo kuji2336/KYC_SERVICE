@@ -23,3 +23,5 @@ This is Simple Node.js Application which uses `mailchimp_transactional` email.
 5. ## Create Mandrill/Handlebar Templates: `https://mandrillapp.com/templates`
 
 6. ## Check Acitivities: `https://mandrillapp.com/activity`
+
+7. ## Import/Export Custom HTML template: `https://mailchimp.com/help/import-a-custom-html-template/`
