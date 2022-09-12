@@ -5,9 +5,10 @@ This is Simple Node.js Application which uses `mailchimp_transactional` email.
 
 # RUN APPLICATION
 
-1. Navigate to `./src` folder
-2. Run `nodemon app.js`
-3. Application will run on Port 3000
+1. `npm run start`,
+2. Application will run on Port `9000`,
+3. Navigate to `.netlify/functions/api/sendGmail` directory.
+4. You can Live test endpoint via PostMan `http://${host}/.netlify/functions/api/sendGmail`
 
 
 # USEFUL RESOURCES
