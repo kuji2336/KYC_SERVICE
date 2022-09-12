@@ -22,7 +22,7 @@ const SendNotification = async(message)=>{
   return response[0]
 }
 
-router.post('/sendData', (req, res)=>{
+router.post('/sendGmail', (req, res)=>{
   const message = {
     from_email: "sm@burtula.com",  // Verified SMTP Domain
     subject: "Test",
