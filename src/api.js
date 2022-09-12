@@ -22,18 +22,18 @@ const SendNotification = async(message)=>{
   return response[0]
 }
 
-router.get('/sendData', (req, res)=>{
+router.post('/sendData', (req, res)=>{
   const message = {
     from_email: "sm@burtula.com",  // Verified SMTP Domain
     subject: "Test",
-    text: "Hello Test",
+    text: `${req.body.text}`,
     to: [
       {
         email: "sm@burtula.com", // Verified SMTP Domain
         type: "to",
       },
     ],
-    
+
     merge: true,
     merge_language: "handlebars",
   
@@ -41,7 +41,7 @@ router.get('/sendData', (req, res)=>{
     global_merge_vars: [   
       {
         name: "firstname",
-        content: "user",
+        content: `${req.body.username}`,
       },
     ],
   };
