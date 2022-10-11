@@ -30,33 +30,32 @@ const SendNotification = async (message) => {
   return response[0];
 };
 
-const COIN_MARKET_CAP_BASE_URI = "https://pro-api.coinmarketcap.com/v1";
+// const COIN_MARKET_CAP_BASE_URI = "https://pro-api.coinmarketcap.com/v1";
 
-const getTokenPriceInUSD = async (token) => {
-  const response = await axios.get(
-    `${COIN_MARKET_CAP_BASE_URI}/cryptocurrency/quotes/latest?symbol=${token}&convert=usd`,
-    {
-      headers: {
-        "X-CMC_PRO_API_KEY": "5932a5df-d96c-4421-8d35-866445a11081",
-      },
-    }
-  );
+// const getTokenPriceInUSD = async (token) => {
+//   const response = await axios.get(
+//     `${COIN_MARKET_CAP_BASE_URI}/cryptocurrency/quotes/latest?symbol=${token}&convert=usd`,
+//     {
+//       headers: {
+//         "X-CMC_PRO_API_KEY": "5932a5df-d96c-4421-8d35-866445a11081",
+//       },
+//     }
+//   );
+//   return response;
+// };
 
-  return response;
-};
-
-router.get("/convert", (req, res) => {
-  getTokenPriceInUSD(req.query.token)
-    .then((response) => {
-      const code = response.data.status.error_code;
-      const price =
-        response.data.data[req.query.token]["quote"]["USD"]["price"];
-      res.send({ code, price });
-    })
-    .catch((err) => {
-      res.send({ data: err });
-    });
-});
+// router.get("/convert", (req, res) => {
+//   getTokenPriceInUSD(req.query.token)
+//     .then((response) => {
+//       const code = response.data.status.error_code;
+//       const price =
+//         response.data.data[req.query.token]["quote"]["USD"]["price"];
+//       res.send({ code, price });
+//     })
+//     .catch((err) => {
+//       res.send({ data: err });
+//     });
+// });
 
 router.post("/sendGmail", (req, res) => {
   const dexerTokenAddr = "0xbcbdecf8e76a5c32dba69de16985882ace1678c6";
