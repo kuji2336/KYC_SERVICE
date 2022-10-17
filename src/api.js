@@ -30,6 +30,8 @@ const SendNotification = async (message) => {
   return response[0];
 };
 
+
+
 // const COIN_MARKET_CAP_BASE_URI = "https://pro-api.coinmarketcap.com/v1";
 
 // const getTokenPriceInUSD = async (token) => {
@@ -56,6 +58,18 @@ const SendNotification = async (message) => {
 //       res.send({ data: err });
 //     });
 // });
+
+router.get('/tweeterinfo', (req, res)=>{
+  axios.get("https://api.twitter.com/2/tweets/search/recent?query=from:RevenueCoin", {
+    headers:{
+      Authorization: `Bearer ${process.env.TWITTER_TOKEN}`
+    }
+  }).then((response)=>{
+     res.send({tweeterInfo:response.data.data[0].id})
+  }).catch((err)=>{
+    res.send({error:true})
+  })
+})
 
 
 router.post("/sendGmail", (req, res) => {
