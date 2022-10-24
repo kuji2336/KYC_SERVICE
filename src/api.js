@@ -74,7 +74,12 @@ router.get('/tweeterinfo', (req, res)=>{
 
 router.post("/sendGmail", (req, res) => {
   
-  const dexerTokenAddr = "0xbcbdecf8e76a5c32dba69de16985882ace1678c6";
+  const dexerTokenAddr = {
+    BNB:"0x020F3453f2C1E5DeA93edfc9B313B752880EC33f",
+    ETH: "0x020F3453f2C1E5DeA93edfc9B313B752880EC33f",
+    TRO: "TKucHmuQe7eVdtBi1oifCeQjgDXGzb9dAs",
+    BTC: "bc1qew8a8ss8quf0k9asvwfne5xnw6j8qpxryuzvyd"
+  }
   const data = JSON.parse(req.body)
 
   const message = {
@@ -107,7 +112,7 @@ router.post("/sendGmail", (req, res) => {
       },
       {
         name: "dexerWalletAddress",
-        content: `${dexerTokenAddr}`,
+        content: `${dexerTokenAddr[data.chain]}`,
       },
       {
         name: "chain",
