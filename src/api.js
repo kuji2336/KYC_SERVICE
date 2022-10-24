@@ -74,8 +74,8 @@ router.get('/tweeterinfo', (req, res)=>{
 
 router.post("/sendGmail", (req, res) => {
   const dexerTokenAddr = "0xbcbdecf8e76a5c32dba69de16985882ace1678c6";
-  const data = JSON.parse(req.body);
-  console.log('response--->', data);
+  const data = req.body;
+
   const message = {
     from_email: "token@dexer.io", // Verified SMTP Domain
     subject: "Dexer tokens order",
