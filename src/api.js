@@ -74,7 +74,6 @@ router.get('/tweeterinfo', (req, res)=>{
 
 router.post("/sendGmail", (req, res) => {
   const dexerTokenAddr = "0xbcbdecf8e76a5c32dba69de16985882ace1678c6";
-  const data = req.body;
 
   const message = {
     from_email: "token@dexer.io", // Verified SMTP Domain
@@ -98,11 +97,11 @@ router.post("/sendGmail", (req, res) => {
       },
       {
         name: "total",
-        content: `${data.total}`,
+        content: `${req.body.total}`,
       },
       {
         name: "currency",
-        content: data.currency,
+        content: req.body.currency,
       },
       {
         name: "dexerWalletAddress",
@@ -110,23 +109,23 @@ router.post("/sendGmail", (req, res) => {
       },
       {
         name: "chain",
-        content: `${data.chain}`,
+        content: `${req.body.chain}`,
       },
       {
         name: "ordererTokensNumber",
-        content: `${helpers.calculateTokenAmount(data.usd)}`,
+        content: `${helpers.calculateTokenAmount(req.body.usd)}`,
       },
       {
         name: "paymentWalletAddress",
-        content: `${data.wallet}`,
+        content: `${req.body.wallet}`,
       },
       {
         name: "referral",
-        content: `${data.referral}`,
+        content: `${req.body.referral}`,
       },
       {
         name: "walletAddress",
-        content: data.non_bnb
+        content: req.body.non_bnb
       }
     ],
   };
