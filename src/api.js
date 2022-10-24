@@ -3,14 +3,13 @@ dotenv.config();
 const express = require("express");
 const serverless = require("serverless-http");
 const cors = require("cors");
-const helpers = require('./helpers')
+const helpers = require("./helpers");
 const axios = require("axios");
-const axiosRetry = require('axios-retry')
+const axiosRetry = require("axios-retry");
 const { v4: uuidv4 } = require("uuid");
 const mailchimp = require("@mailchimp/mailchimp_transactional")(
   process.env.MAILCHIMP_KEY
 );
-
 
 const app = express();
 const router = express.Router();
@@ -22,7 +21,10 @@ app.use(`/.netlify/functions/api`, router);
 const SendNotification = async (message, lang) => {
   const response = await mailchimp.messages.sendTemplate({
     key: process.env.MAILCHIMP_KEY,
-    template_name: lang === 'en' ? process.env.MAILCHIMP_TEMPLATE_NAME : process.env.MAILCHIMP_TEMPLATE_NAME_PL,
+    template_name:
+      lang === "en"
+        ? process.env.MAILCHIMP_TEMPLATE_NAME
+        : process.env.MAILCHIMP_TEMPLATE_NAME_PL,
     template_content: [],
     message,
   });
@@ -30,7 +32,7 @@ const SendNotification = async (message, lang) => {
   return response[0];
 };
 
-
+//!! FALLBACK CODE
 
 // const COIN_MARKET_CAP_BASE_URI = "https://pro-api.coinmarketcap.com/v1";
 
@@ -59,28 +61,33 @@ const SendNotification = async (message, lang) => {
 //     });
 // });
 
-router.get('/tweeterinfo', (req, res)=>{
-  axios.get("https://api.twitter.com/2/tweets/search/recent?query=from:RevenueCoin", {
-    headers:{
-      Authorization: `Bearer ${process.env.TWITTER_TOKEN}`
-    }
-  }).then((response)=>{
-     res.send({tweeterInfo:response.data.data[0].id})
-  }).catch((err)=>{
-    res.send({error:true})
-  })
-})
-
+router.get("/tweeterinfo", (req, res) => {
+  axios
+    .get(
+      `${process.env.TWITTER_API_V2_URI}/tweets/search/recent?query=from:RevenueCoin`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.TWITTER_TOKEN}`,
+        },
+      }
+    )
+    .then((response) => {
+      res.send({ tweeterInfo: response.data.data[0].id });
+    })
+    .catch((err) => {
+      res.send({ error: true });
+    });
+});
 
 router.post("/sendGmail", (req, res) => {
-  
   const dexerTokenAddr = {
-    BNB:"0x020F3453f2C1E5DeA93edfc9B313B752880EC33f",
+    BNB: "0x020F3453f2C1E5DeA93edfc9B313B752880EC33f",
     ETH: "0x020F3453f2C1E5DeA93edfc9B313B752880EC33f",
     TRO: "TKucHmuQe7eVdtBi1oifCeQjgDXGzb9dAs",
-    BTC: "bc1qew8a8ss8quf0k9asvwfne5xnw6j8qpxryuzvyd"
-  }
-  const data = JSON.parse(req.body)
+    BTC: "bc1qew8a8ss8quf0k9asvwfne5xnw6j8qpxryuzvyd",
+  };
+
+  const data = JSON.parse(req.body);
 
   const message = {
     from_email: "token@dexer.io", // Verified SMTP Domain
@@ -132,8 +139,8 @@ router.post("/sendGmail", (req, res) => {
       },
       {
         name: "walletAddress",
-        content: data.non_bnb
-      }
+        content: data.non_bnb,
+      },
     ],
   };
 
@@ -142,8 +149,5 @@ router.post("/sendGmail", (req, res) => {
   });
 });
 
-
-
 module.exports = app;
 module.exports.handler = serverless(app);
-
