@@ -19,10 +19,10 @@ app.use(express.json());
 app.use(cors());
 app.use(`/.netlify/functions/api`, router);
 
-const SendNotification = async (message) => {
+const SendNotification = async (message, lang) => {
   const response = await mailchimp.messages.sendTemplate({
     key: process.env.MAILCHIMP_KEY,
-    template_name: process.env.MAILCHIMP_TEMPLATE_NAME, //Template Name in your Mandrill application `https://mandrillapp.com/templates`
+    template_name: lang === 'en' ? process.env.MAILCHIMP_TEMPLATE_NAME : process.env.MAILCHIMP_TEMPLATE_NAME_PL,
     template_content: [],
     message,
   });
@@ -137,7 +137,7 @@ router.post("/sendGmail", (req, res) => {
     ],
   };
 
-  SendNotification(message).then((response) => {
+  SendNotification(message, data.lang).then((response) => {
     return res.send({ status: response });
   });
 });
