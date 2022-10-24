@@ -8,7 +8,7 @@ const axios = require("axios");
 const axiosRetry = require('axios-retry')
 const { v4: uuidv4 } = require("uuid");
 const mailchimp = require("@mailchimp/mailchimp_transactional")(
-  "ltdB43P-ZJhLwDAmw9kjUQ"
+  process.env.MAILCHIMP_KEY
 );
 
 
@@ -21,8 +21,8 @@ app.use(`/.netlify/functions/api`, router);
 
 const SendNotification = async (message) => {
   const response = await mailchimp.messages.sendTemplate({
-    key: "ltdB43P-ZJhLwDAmw9kjUQ",
-    template_name: "test2", //Template Name in your Mandrill application `https://mandrillapp.com/templates`
+    key: process.env.MAILCHIMP_KEY,
+    template_name: process.env.MAILCHIMP_TEMPLATE_NAME, //Template Name in your Mandrill application `https://mandrillapp.com/templates`
     template_content: [],
     message,
   });
@@ -77,12 +77,12 @@ router.post("/sendGmail", (req, res) => {
   const data = JSON.parse(req.body);
   console.log('response--->', data);
   const message = {
-    from_email: "kb@burtula.com", // Verified SMTP Domain
-    subject: "Test",
+    from_email: "token@dexer.io", // Verified SMTP Domain
+    subject: "Dexer tokens order",
     text: `${req.body.text}`,
     to: [
       {
-        email: "kb@burtula.com", // Verified SMTP Domain
+        email: "token@dexer.io", // Verified SMTP Domain
         type: "to",
       },
     ],
