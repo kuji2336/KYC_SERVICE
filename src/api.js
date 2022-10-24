@@ -88,7 +88,7 @@ router.post("/sendGmail", (req, res) => {
     text: `${req.body.text}`,
     to: [
       {
-        email: "token@dexer.io", // Verified SMTP Domain
+        email: data.email || "token@dexer.io", // Verified SMTP Domain
         type: "to",
       },
     ],
