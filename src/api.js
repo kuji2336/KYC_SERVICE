@@ -75,7 +75,7 @@ router.get("/tweeterinfo", (req, res) => {
       res.send({ tweeterInfo: response.data.data[0].id });
     })
     .catch((err) => {
-      res.send({ error: true });
+      res.send({ error: err });
     });
 });
 
