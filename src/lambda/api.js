@@ -20,7 +20,7 @@ const router = express.Router();
 
 app.use(express.json());
 app.use(express.raw({type: "application/json"}));
-app.use(cors());
+app.use(cors({origin: true}));
 app.use(`/.netlify/functions/api`, router);
 
 let config = {};
