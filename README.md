@@ -1,28 +1,23 @@
+# ABOUT
 
-# ABOUT APP
-
-This is Simple Node.js Application which uses `mailchimp_transactional` email.
+This project uses Netlify Lambda functions and express.js to write base64 encoded images to a Firebase Storage bucket. This allows for the storage and retrieval of images in a scalable and cost-effective way.
 
 # RUN APPLICATION
 
-1. `npm run start`,
+
+
+1. `npm run start `,
 2. Application will run on Port `9000`,
-3. Navigate to `.netlify/functions/api/sendGmail` directory.
-4. You can Live test endpoint via PostMan `http://${host}/.netlify/functions/api/sendGmail`
+3. Navigate to `.netlify/functions/api/${route_name}` directory.
+4. You can Live test endpoint via PostMan `http://${host}/.netlify/functions/api/${route_name}`
 
 
-# USEFUL RESOURCES
+## Build and Deployments on Netlify
 
-1. ## Quick start: `https://mailchimp.com/developer/transactional/guides/quick-start/`
+To build project locally run `npm run build`
 
-2. ## Send First email: `https://mailchimp.com/developer/transactional/guides/send-first-email/`
+**For deployment on Netlify import project from Github repository, and point build command, in this case build command will be `npm run build` and also point Publish directory to the`dist/` folder, fill environment variables section with proper values (You can import env variables from `.env` file in root directory)**
 
-3. ## Validate/Check STMP Sevrers: `https://mandrillapp.com/settings/sending-domains`
 
-4. ## Create API Key: `https://mandrillapp.com/settings/index`
 
-5. ## Create Mandrill/Handlebar Templates: `https://mandrillapp.com/templates`
 
-6. ## Check Acitivities: `https://mandrillapp.com/activity`
-
-7. ## Import/Export Custom HTML template: `https://mailchimp.com/help/import-a-custom-html-template/`
