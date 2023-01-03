@@ -1,6 +1,3 @@
-# ABOUT
-
-This project uses Netlify Lambda functions and express.js to write base64 encoded images to a Firebase Storage bucket. This allows for the storage and retrieval of images in a scalable and cost-effective way.
 
 # RUN APPLICATION
 
