@@ -8,8 +8,8 @@ const dotenv = require("dotenv");
 const firebase = require('./firebase')
 
 // These parameters should be used for all requests
-const SUMSUB_APP_TOKEN = 'prd:JOgrVZT4Wjb2IXIWZMZA2QLB.9Qgj3RCT4fXj4ricZRkKFz52ty0NSZpP'; // Example: sbx:uY0CgwELmgUAEyl4hNWxLngb.0WSeQeiYny4WEqmAALEAiK2qTC96fBad - Please don't forget to change when switching to production
-const SUMSUB_SECRET_KEY = 'VKyoUmL8jKTXv6f2Y89EL1sS1Zj8oVCk';
+const SUMSUB_APP_TOKEN = process.env.SUMSUB_APP_TOKEN; // Example: sbx:uY0CgwELmgUAEyl4hNWxLngb.0WSeQeiYny4WEqmAALEAiK2qTC96fBad - Please don't forget to change when switching to production
+const SUMSUB_SECRET_KEY = process.env.SUMSUB_SECRET_KEY;
  // Example: Hej2ch71kG2kTd1iIUDZFNsO5C1lh5Gq - Please don't forget to change when switching to production
 const SUMSUB_BASE_URL = 'https://api.sumsub.com'; 
 
